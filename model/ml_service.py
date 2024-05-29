@@ -5,7 +5,7 @@ from PIL import Image
 
 import numpy as np
 import redis
-import settings
+from model import settings
 from tensorflow.keras.applications import ResNet50
 from tensorflow.keras.applications.resnet50 import decode_predictions, preprocess_input
 from tensorflow.keras.preprocessing import image
@@ -57,6 +57,8 @@ def predict(image_name):
     # Obtener la clase predicha y la probabilidad asociada
     class_id, class_name, pred_probability = decoded_predictions[0]
     
+    pred_probability = round(pred_probability, 4)
+
     return class_name, pred_probability
 
 def classify_process():
